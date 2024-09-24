@@ -28,8 +28,7 @@ export default definePlugin({
             "twitter.com": "vxtwitter.com",
             "x.com": "vxtwitter.com",
             "pixiv.net": "phixiv.net",
-            "reddit.com": "vxreddit.com",
-            "clips.twitch.tv": "clips.fxtwitch.tv"
+            "reddit.com": "vxreddit.com"
         };
 
     
@@ -38,15 +37,6 @@ export default definePlugin({
             
             if (lowerUrl.includes('twitter.com/i/spaces/') || lowerUrl.includes('x.com/i/spaces/')) {
                 return url;
-            }
-
-            // Special handling for Twitch clip URLs
-            const twitchClipRegex = /https?:\/\/(www\.)?twitch\.tv\/[^\/]+\/clip\/([^\/\s]+)/i;
-            const twitchClipMatch = url.match(twitchClipRegex);
-            if (twitchClipMatch) {
-            // Remove trailing slash if present
-            const clipId = twitchClipMatch[2].replace(/\/$/, '');
-            return `https://clips.fxtwitch.tv/${clipId}`;
             }
 
             const redditRegex = /https?:\/\/(old\.|new\.)?reddit\.com(.*)/i;
