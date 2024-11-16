@@ -28,7 +28,7 @@ export default definePlugin({
             "twitter.com": "vxtwitter.com",
             "x.com": "vxtwitter.com",
             "pixiv.net": "phixiv.net",
-            "reddit.com": "vxreddit.com"
+            "reddit.com": "rxddit.com"
         };
 
     
@@ -42,7 +42,7 @@ export default definePlugin({
             const redditRegex = /https?:\/\/(old\.|new\.)?reddit\.com(.*)/i;
             const redditMatch = url.match(redditRegex);
             if (redditMatch) {
-                return `https://vxreddit.com${redditMatch[2]}`;
+                return `https://rxddit.com${redditMatch[2]}`;
             }
 
             for (const [oldDomain, newDomain] of Object.entries(urlMap)) {
