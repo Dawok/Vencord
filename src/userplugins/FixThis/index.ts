@@ -25,8 +25,8 @@ export default definePlugin({
         const urlMap: { [key: string]: string } = {
             "tiktok.com": "tnktok.com",
             "instagram.com": "ddinstagram.com",
-            "twitter.com": "vxtwitter.com",
-            "x.com": "vxtwitter.com",
+            "twitter.com": "fxtwitter.com",
+            "x.com": "fxtwitter.com",
             "pixiv.net": "phixiv.net",
             "reddit.com": "rxddit.com"
         };
