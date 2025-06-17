@@ -1,13 +1,8 @@
 import definePlugin from "@utils/types";
 import { Devs } from "@utils/constants";
 import { findByPropsLazy } from "@webpack";
-import { createSettings } from "@utils/settings";
 
 const MessageActions = findByPropsLazy("sendMessage");
-
-const settings = createSettings({
-    enabled: true
-});
 
 function convertToMonospace(text: string): string {
     return text.split("").map(c => {
@@ -18,27 +13,26 @@ function convertToMonospace(text: string): string {
     }).join("");
 }
 
+let originalSendMessage: any;
+
 export default definePlugin({
     name: "MonospaceTyper",
     description: "Converts all your messages into Unicode monospace characters.",
     authors: [Devs.Dawok],
-    settings,
-
+    
     start() {
-        const opts = settings.store;
-        const originalSendMessage = MessageActions.sendMessage;
-
+        originalSendMessage = MessageActions.sendMessage;
         MessageActions.sendMessage = (channelId: string, message: any, ...args: any[]) => {
-            if (opts.enabled && typeof message.content === "string") {
+            if (typeof message.content === "string") {
                 message.content = convertToMonospace(message.content);
             }
             return originalSendMessage(channelId, message, ...args);
         };
     },
-
+    
     stop() {
-        if (MessageActions.sendMessage !== MessageActions.originalSendMessage) {
-            MessageActions.sendMessage = MessageActions.originalSendMessage;
+        if (originalSendMessage) {
+            MessageActions.sendMessage = originalSendMessage;
         }
     }
 });
