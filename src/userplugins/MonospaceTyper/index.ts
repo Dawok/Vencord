@@ -1,11 +1,11 @@
 import definePlugin from "@utils/types";
 import { Devs } from "@utils/constants";
 import { findByPropsLazy } from "@webpack";
-import { settings } from "@api";
+import { createSettings } from "@utils/settings";
 
 const MessageActions = findByPropsLazy("sendMessage");
 
-const [useSettings, Settings] = settings({
+const settings = createSettings({
     enabled: true
 });
 
@@ -22,10 +22,10 @@ export default definePlugin({
     name: "MonospaceTyper",
     description: "Converts all your messages into Unicode monospace characters.",
     authors: [Devs.Dawok],
-    settings: Settings,
+    settings,
 
     start() {
-        const opts = useSettings();
+        const opts = settings.store;
         const originalSendMessage = MessageActions.sendMessage;
 
         MessageActions.sendMessage = (channelId: string, message: any, ...args: any[]) => {
@@ -37,7 +37,6 @@ export default definePlugin({
     },
 
     stop() {
-        // Reset sendMessage when the plugin stops
         if (MessageActions.sendMessage !== MessageActions.originalSendMessage) {
             MessageActions.sendMessage = MessageActions.originalSendMessage;
         }
