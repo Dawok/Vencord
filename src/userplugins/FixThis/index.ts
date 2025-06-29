@@ -25,6 +25,13 @@ const modifyUrls = (content: string): string => {
             return url;
         }
 
+        // Special handling for X.com profile URLs - convert to twitter.com instead of fxtwitter
+        const xProfileRegex = /https?:\/\/(www\.)?x\.com\/([a-zA-Z0-9_]+)\/?$/i;
+        const xProfileMatch = url.match(xProfileRegex);
+        if (xProfileMatch) {
+            return `https://twitter.com/${xProfileMatch[2]}`;
+        }
+
         // Special handling for Reddit subdomains
         const redditRegex = /https?:\/\/(old\.|new\.)?reddit\.com(.*)/i;
         const redditMatch = url.match(redditRegex);
@@ -32,7 +39,7 @@ const modifyUrls = (content: string): string => {
             return `https://rxddit.com${redditMatch[2]}`;
         }
 
-        // Process other domains
+        // Process other domains (including tweet URLs)
         for (const [oldDomain, newDomain] of Object.entries(urlMap)) {
             const regex = new RegExp(`https?://([a-zA-Z0-9-]+\\.)?${oldDomain.replace('.', '\\.')}`, 'i');
             if (regex.test(lowerUrl)) {
