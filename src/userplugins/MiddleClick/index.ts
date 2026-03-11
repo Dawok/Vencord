@@ -12,8 +12,8 @@ let cursorOverlay: HTMLDivElement | null = null;
 // ─── Scroll speed config ───────────────────────────────────────────────────
 const DEADZONE = 10;        // px from origin before scrolling kicks in
 const BASE_SPEED = 0.12;    // multiplier at the edge of the deadzone
-const EXPONENT = 1.7;       // >1 = faster the further you go (try 1.5–2.5)
-const MAX_SPEED = 60;       // max px per frame (safety cap)
+const EXPONENT = 1.5;       // >1 = faster the further you go (try 1.5–2.5)
+const MAX_SPEED = 50;       // max px per frame (safety cap)
 
 // ─── Discord scroll zones ──────────────────────────────────────────────────
 // These CSS selectors cover the main areas users actually want to scroll.
