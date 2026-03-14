@@ -10,11 +10,11 @@ const modifyUrls = (content: string): string => {
 
     const urlMap: { [key: string]: string } = {
         "tiktok.com": "tnktok.com",
-        "instagram.com": "ddinstagram.com",
+        "instagram.com": "fxstagram.com",
         "twitter.com": "fxtwitter.com",
         "x.com": "fxtwitter.com",
         "pixiv.net": "phixiv.net",
-        "reddit.com": "rxddit.com"
+        "reddit.com": "vxreddit.com"
     };
 
     const processUrl = (url: string): string => {
@@ -36,7 +36,7 @@ const modifyUrls = (content: string): string => {
         const redditRegex = /https?:\/\/(old\.|new\.)?reddit\.com(.*)/i;
         const redditMatch = url.match(redditRegex);
         if (redditMatch) {
-            return `https://rxddit.com${redditMatch[2]}`;
+            return `https://vxreddit.com${redditMatch[2]}`;
         }
 
         // Process other domains (including tweet URLs)
