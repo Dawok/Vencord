@@ -14,24 +14,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the fork repository
+    - name: Checkout
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
-    - name: Set up Git config
+    - name: Git config
       run: |
-        git config --local user.name "GitHub Action"
-        git config --local user.email "actions@github.com"
+        git config user.name "GitHub Action"
+        git config user.email "actions@github.com"
 
-    - name: Add upstream repository
+    - name: Add upstream
       run: git remote add upstream https://github.com/Vendicated/Vencord.git
 
-    - name: Sync with upstream
+    - name: Rebase onto upstream
       run: |
         git fetch upstream
         git checkout main
-        git reset --hard upstream/main
+        git rebase upstream/main
 
-    - name: Push changes to fork repository
-      run: git push origin main --force
+    - name: Push
+      run: git push origin main --force-with-lease
