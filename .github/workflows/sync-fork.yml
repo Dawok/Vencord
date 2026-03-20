@@ -5,6 +5,10 @@ on:
     - cron: "0 6 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+  workflows: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -31,5 +35,3 @@ jobs:
 
     - name: Push changes to fork repository
       run: git push origin main --force
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
