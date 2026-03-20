@@ -4,7 +4,7 @@ permissions: write-all
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # every Monday at 04:00 UTC
+    - cron: '0 4 * * 1'
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}   # ← use PAT here
 
       - name: Configure git identity
         run: |
